@@ -138,3 +138,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'nicolas.paulo.vega06@gmail.com'
 EMAIL_HOST_PASSWORD = 'uapvrjbqfgpjxbpa'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Configuracion tokens
+CSRF_TRUSTES_ORIGINS = ['http://*', "https://portfolio-production-1789.up.railway.app"]
