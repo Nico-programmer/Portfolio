@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-^^&yo61_7xck2#jg(9k8=)2x1u0eqz2v$(*zn=2ehpgkd5&si@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','web-production-17d9.up.railway.app']
+ALLOWED_HOSTS = ['localhost','portfolio-production-1789.up.railway.app']
 
 
 # Application definition
@@ -144,4 +144,4 @@ EMAIL_HOST_PASSWORD = 'uapvrjbqfgpjxbpa'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Configuracion tokens
-CSRF_TRUSTED_ORIGINS = ['http://*','https://web-production-17d9.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['http://*','https://portfolio-production-1789.up.railway.app']
