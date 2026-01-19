@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^^&yo61_7xck2#jg(9k8=)2x1u0eqz2v$(*zn=2ehpgkd5&si@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'portfolio-production-1789.up.railway.app']
 
 
 # Application definition
@@ -133,5 +133,3 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'nicolas.paulo.vega06@gmail.com'
 EMAIL_HOST_PASSWORD = 'uapvrjbqfgpjxbpa'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
-ALLOWED_HOSTS = ['localhost', 'portfolio-production-1789.up.railway.app']
