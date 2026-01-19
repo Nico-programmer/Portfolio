@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Logotipo -->
+    <link rel="shortcut icon" href="{% static "img/logo.png" %}" type="image/x-icon">
+
+    <!-- Diseño (css files and icons) -->
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <script src="https://kit.fontawesome.com/93981ca0bd.js" crossorigin="anonymous"></script>
+
+    <!-- Mensajes (sweetalert) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <title>Portafolio</title>
+</head>
+<body>
+
+    <!-- Encabezado de pagina -->
+    {% comment navbar %} Incluimos el encabezado de nuestro portafolio {% endcomment %}
+    {% include "includes/navbar.html" %}
+
+    <!-- Contenido -->
+    {% block content %}{% endblock %}
+
+    <!-- Pie de pagina -->
+    {% comment footer %} Incluimos el pie de pagina de nuestro portafolio {% endcomment %}
+    {% include "includes/footer.html" %}
+
+    <!-- scroll reveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!-- Typed js -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+    <!-- Archivos JavaScript (js files) -->
+    <script src="{% static "js/script.js" %}"></script>
+</body>
+</html>

@@ -1,0 +1,672 @@
+/* Importa la fuente "Poppins" desde Google Fonts con distintos grosores (300 a 900) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ================================ DISEÑO GENERAL (RESET CSS) ================================ */
+* {
+    margin: 0; /* Elimina márgenes por defecto */
+    padding: 0; /* Elimina rellenos por defecto */
+    box-sizing: border-box; /* Hace que el padding y border no aumenten el tamaño del elemento */
+    text-decoration: none; /* Elimina subrayados de enlaces */
+    border: none; /* Elimina bordes por defecto (inputs, botones) */
+    outline: none; /* Elimina el contorno al hacer focus */
+    scroll-behavior: smooth; /* Hace el scroll suave */
+    font-family: 'Poppins', sans-serif; /* Define la fuente principal del sitio */
+}
+
+/* ================================ VARIABLES CSS GLOBALES ================================ */
+:root {
+    --bg-color: #020d19; /* Color de fondo principal */
+    --second-bg-color: #0b2639; /* Color de fondo secundario */
+    --text-color: #eaeaeb; /* Color principal del texto */
+    --main-color: #05b9e5; /* Color principal del diseño (acentos, botones, etc.) */
+}
+
+/* ================================ CONFIGURACIÓN GLOBAL HTML ================================ */
+html {
+    font-size: 62.5%; /* 62.5% hace que: 1rem = 10px (más fácil de calcular) */
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* ================================ ESTILOS DEL BODY ================================ */
+body {
+    background: var(--bg-color); /* Aplica el color de fondo principal */
+    color: var(--text-color); /* Aplica el color del texto */
+}
+
+/* ================================ SECCIONES GENERALES ================================ */
+section {
+    min-height: 100vh; /* Cada sección ocupa mínimo el alto completo de la pantalla */
+    padding: 10rem 9% 2rem; /* Padding: 10rem arriba, 9% a los lados, 2rem abajo */
+}
+
+/* ================================ DISEÑO DEL NAVBAR ================================ */
+.header {
+    position: fixed; /* Fija el navbar en la parte superior */
+    top: 0; /* Lo posiciona en la parte superior */
+    left: 0; /* Alinea el navbar al borde izquierdo */
+    width: 100%; /* Ocupa todo el ancho de la pantalla */
+    padding: 2rem 9%; /* Espaciado interno: 2rem arriba/abajo, 9% a los lados */
+    background: var(--bg-color); /* Color de fondo del navbar */
+    display: flex; /* Usa Flexbox para alinear los elementos */
+    justify-content: space-between; /* Separa logo y menú */
+    z-index: 100; /* Mantiene el navbar por encima de otros elementos */
+}
+
+/* NAVBAR STICKY */
+.header .sticky {
+    border-bottom: .1rem solid rgba(0, 0, 0, .2); /* Línea inferior al hacer scroll */
+}
+
+/* LOGO */
+.logo {
+    font-size: 2.5rem; /* Tamaño del texto del logo */
+    color: var(--text-color); /* Color del logo */
+    font-weight: 600; /* Grosor del texto */
+    cursor: default; /* Evita que el cursor sea clickeable */
+}
+
+/* LINKS DEL NAVBAR */
+.navbar a {
+    font-size: 1.7rem; /* Tamaño del texto de los enlaces */
+    color: var(--text-color); /* Color por defecto de los enlaces */
+    margin-left: 4rem; /* Espacio entre enlaces */
+    transition: .3s; /* Transición suave al hover */
+}
+
+/* HOVER Y LINK ACTIVO */
+.navbar a:hover,
+.navbar a.active {
+    color: var(--main-color); /* Cambia el color al pasar el mouse o estar activo */
+}
+
+/* ÍCONO DEL MENÚ (RESPONSIVE) */
+#menu-icon {
+    font-size: 3.6rem; /* Tamaño del ícono del menú */
+    color: var(--text-color); /* Color del ícono */
+    display: none; /* Oculto por defecto (se muestra en responsive) */
+}
+
+/* ================================ SECCIÓN DE INICIO (HOME) ================================ */
+.home {
+    display: flex; /* Usa Flexbox para alinear el contenido */
+    justify-content: center; /* Centra horizontalmente los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+}
+
+/* IMAGEN DE INICIO */
+.home-img img {
+    width: 35vw; /* La imagen ocupa el 35% del ancho de la ventana */
+    animation: floatImage 4s ease-in-out infinite; /* Animación flotante continua */
+}
+
+/* ANIMACIÓN DE IMAGEN */
+@keyframes floatImage {
+    0% {
+        transform: translateY(0); /* Posición inicial */
+    }
+
+    50% {
+        transform: translateY(-2.4rem); /* Se mueve hacia arriba */
+    }
+
+    100% {
+        transform: translateY(0); /* Regresa a la posición inicial */
+    }
+}
+
+/* CONTENIDO DE TEXTO */
+.home-content h3 {
+    font-size: 3.2rem; /* Tamaño del subtítulo */
+    font-weight: 700; /* Grosor del texto */
+}
+
+/* Segundo h3 dentro de home-content */
+.home-content h3:nth-of-type(2) {
+    margin-bottom: 2rem; /* Espacio inferior */
+}
+
+/* TEXTO DESTACADO */
+span {
+    color: var(--main-color); /* Color principal para palabras destacadas */
+}
+
+/* TÍTULO PRINCIPAL */
+.home-content h1 {
+    font-size: 5.6rem; /* Tamaño del título */
+    font-weight: 700; /* Grosor del texto */
+    line-height: 1.3; /* Altura de línea */
+}
+
+/* PÁRRAFO */
+.home-content p {
+    font-size: 1.6rem; /* Tamaño del texto del párrafo */
+}
+
+/* REDES SOCIALES */
+.social-media a {
+    display: inline-flex; /* Permite centrar el ícono */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    width: 4rem; /* Ancho del ícono */
+    height: 4rem; /* Alto del ícono */
+    background: transparent; /* Fondo transparente */
+    border: .2rem solid var(--main-color); /* Borde con color principal */
+    border-radius: 50%; /* Forma circular */
+    font-size: 2rem; /* Tamaño del ícono */
+    color: var(--main-color); /* Color del ícono */
+    margin: 3rem 1.5rem 3rem 0; /* Separación entre íconos */
+    transition: .5s ease; /* Transición suave */
+}
+
+/* Efecto hover en redes sociales */
+.social-media a:hover {
+    background: var(--main-color); /* Fondo al pasar el mouse */
+    color: var(--second-bg-color); /* Color del ícono */
+    box-shadow: 0 0 1rem var(--main-color); /* Sombra luminosa */
+}
+
+/*  BOTÓN PRINCIPAL */
+.btn {
+    display: inline-block; /* Permite aplicar padding y tamaño */
+    padding: 1rem 2.8rem; /* Espaciado interno del botón */
+    background: var(--main-color); /* Color de fondo */
+    border-radius: 4rem; /* Bordes redondeados */
+    box-shadow: 0 0 1rem var(--main-color); /* Sombra inicial */
+    font-size: 1.6rem; /* Tamaño del texto */
+    color: var(--second-bg-color); /* Color del texto */
+    letter-spacing: .1rem; /* Espaciado entre letras */
+    font-weight: 600; /* Grosor del texto */
+    transition: .5s ease; /* Transición suave */
+}
+
+/* Efecto hover del botón */
+.btn:hover {
+    box-shadow: none; /* Elimina la sombra al pasar el mouse */
+}
+
+/* ================================ SECCIÓN "SOBRE MÍ" (ABOUT) ================================ */
+.about {
+    display: flex; /* Usa Flexbox para alinear los elementos */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+    gap: 2rem; /* Espacio entre la imagen y el texto */
+    background: var(--second-bg-color); /* Fondo secundario de la sección */
+}
+
+/* IMAGEN SOBRE MÍ */
+.about-img img {
+    width: 35vw; /* La imagen ocupa el 35% del ancho de la ventana */
+}
+
+/* TÍTULO GENERAL */
+.heading {
+    text-align: center; /* Centra el texto */
+    font-size: 4.5rem; /* Tamaño del título */
+}
+
+/* TÍTULO DE LA SECCIÓN */
+.about-content h2 {
+    text-align: left; /* Alinea el texto a la izquierda */
+    line-height: 1.2; /* Altura de línea para mejor legibilidad */
+}
+
+/* SUBTÍTULO */
+.about-content h3 {
+    font-size: 2.6rem; /* Tamaño del subtítulo */
+}
+
+/* TEXTO DESCRIPTIVO */
+.about-content p {
+    font-size: 1.6rem; /* Tamaño del texto */
+    margin: 2rem 0 3rem; /* Margen: arriba 2rem, lados 0, abajo 3rem */
+}
+
+/* ================================ SECCIÓN DE CONOCIMIENTOS (SERVICES / LEARNING) ================================ */
+.learning h2 {
+    margin-bottom: 5rem; /* Espacio inferior del título de la sección */
+}
+
+/* CONTENEDOR DE CONOCIMIENTOS */
+.learning-container {
+    display: flex; /* Usa Flexbox para organizar las tarjetas */
+    justify-content: center; /* Centra horizontalmente las tarjetas */
+    align-items: center; /* Centra verticalmente las tarjetas */
+    flex-wrap: wrap; /* Permite que las tarjetas bajen de línea */
+    gap: 2rem; /* Espacio entre tarjetas */
+}
+
+/*  TARJETAS DE CONOCIMIENTO */
+.learning-container .learning-box {
+    flex: 1 1 30rem; /* Tamaño flexible mínimo de cada tarjeta */
+    background: var(--second-bg-color); /* Fondo secundario */
+    padding: 3rem 2rem 4rem; /* Espaciado interno */
+    border-radius: 2rem; /* Bordes redondeados */
+    text-align: center; /* Centra el texto */
+    border: .2rem solid var(--bg-color); /* Borde inicial */
+    transition: .5s ease; /* Transición suave */
+}
+
+/* Efecto hover en las tarjetas */
+.learning-container .learning-box:hover {
+    border-color: var(--main-color); /* Cambia el color del borde */
+    transform: scale(1.02); /* Aumenta ligeramente el tamaño */
+}
+
+/* ÍCONOS */
+.learning-box i {
+    font-size: 7rem; /* Tamaño del ícono */
+    color: var(--main-color); /* Color principal */
+}
+
+/* TÍTULO DE LA TARJETA */
+.learning-box h3 {
+    font-size: 2.6rem; /* Tamaño del título */
+}
+
+/*  DESCRIPCIÓN */
+.learning-box p {
+    font-size: 1.6rem; /* Tamaño del texto */
+    margin: 1rem 0 3rem; /* Margen superior e inferior */
+}
+
+/* ================================ SECCIÓN DE PROYECTOS (PROJECTS) ================================ */
+.project {
+    background: var(--second-bg-color); /* Fondo secundario de la sección */
+}
+
+/* TÍTULO DE PROYECTOS */
+.project h2 {
+    margin-bottom: 4rem; /* Espacio inferior del título */
+}
+
+/* CONTENEDOR DE PROYECTOS */
+.project-container {
+    display: grid; /* Usa Grid Layout */
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
+    align-items: center; /* Centra verticalmente los elementos */
+    gap: 2.5rem; /* Espacio entre tarjetas */
+}
+
+/* TARJETA DE PROYECTO */
+.project-container .project-box {
+    position: relative; /* Permite posicionar capas internas */
+    border-radius: 2rem; /* Bordes redondeados */
+    box-shadow: 0 0 1rem var(--bg-color); /* Sombra alrededor */
+    overflow: hidden; /* Oculta el contenido que se sale */
+    display: flex; /* Permite alinear la imagen */
+}
+
+/* IMAGEN DEL PROYECTO */
+.project-box img {
+    width: 100%; /* La imagen ocupa todo el contenedor */
+    transition: .5s ease; /* Transición suave */
+}
+
+/* Efecto zoom al pasar el mouse */
+.project-box:hover img {
+    transform: scale(1.1); /* Aumenta el tamaño de la imagen */
+}
+
+/* CAPA OVERLAY DEL PROYECTO */
+.project-box .project-layer {
+    position: absolute; /* Se superpone sobre la imagen */
+    bottom: 0; /* Alineada al fondo */
+    left: 0; /* Alineada a la izquierda */
+    width: 100%; /* Ocupa todo el ancho */
+    height: 100%; /* Ocupa todo el alto */
+    background: linear-gradient(
+        rgba(0, 0, 0, .1),
+        var(--bg-color)
+    ); /* Degradado oscuro */
+    display: flex; /* Flexbox para centrar contenido */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    flex-direction: column; /* Elementos en columna */
+    text-align: center; /* Texto centrado */
+    padding: 0 4rem; /* Espaciado lateral */
+    transform: translateY(100%); /* Oculta la capa hacia abajo */
+    transition: .5s ease; /* Transición suave */
+}
+
+/* Muestra la capa al pasar el mouse */
+.project-box:hover .project-layer {
+    transform: translateY(0); /* La capa sube y se muestra */
+}
+
+/*  TÍTULO DEL PROYECTO */
+.project-layer h4 {
+    font-size: 3rem; /* Tamaño del título */
+}
+
+/* DESCRIPCIÓN DEL PROYECTO */
+.project-layer p {
+    font-size: 1.6rem; /* Tamaño del texto */
+    margin: .3rem 0 1rem; /* Margen superior e inferior */
+}
+
+/* ENLACE DEL PROYECTO */
+.project-layer a {
+    display: inline-flex; /* Permite centrar el ícono */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    width: 5rem; /* Ancho del botón */
+    height: 5rem; /* Alto del botón */
+    background: var(--text-color); /* Fondo claro */
+    border-radius: 50%; /* Forma circular */
+}
+
+/* Ícono dentro del enlace */
+.project-layer a i {
+    font-size: 2rem; /* Tamaño del ícono */
+    color: var(--second-bg-color); /* Color del ícono */
+}
+
+
+/* ============================== SECCIÓN DE CONTACTO (CONTACT) ================================ */
+.contact h2 {
+    margin-bottom: 3rem; /* Espacio inferior del título */
+}
+
+/* FORMULARIO DE CONTACTO */
+.contact form {
+    max-width: 70rem; /* Ancho máximo del formulario */
+    margin: 1rem auto; /* Centra el formulario horizontalmente */
+    text-align: center; /* Centra el contenido */
+    margin-bottom: 3rem; /* Espacio inferior */
+}
+
+/* CONTENEDOR DE INPUTS */
+.contact form .input-box {
+    display: flex; /* Usa Flexbox */
+    justify-content: space-between; /* Separa los inputs */
+    flex-wrap: wrap; /* Permite salto de línea en pantallas pequeñas */
+}
+
+/*  INPUTS Y TEXTAREA */
+.contact form .input-box input,
+.contact form textarea {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 1.5rem; /* Espaciado interno */
+    font-size: 1.6rem; /* Tamaño del texto */
+    color: var(--text-color); /* Color del texto */
+    background: var(--second-bg-color); /* Fondo secundario */
+    border-radius: .8rem; /* Bordes redondeados */
+    margin: .7rem 0; /* Espacio vertical */
+}
+
+/* Inputs en dos columnas */
+.contact form .input-box input {
+    width: 49%; /* Dos inputs por fila */
+}
+
+/* ÁREA DE TEXTO */
+.contact form textarea {
+    resize: none; /* Evita redimensionar el textarea */
+}
+
+/* BOTÓN DEL FORMULARIO */
+.contact form .btn {
+    margin-top: 2rem; /* Espacio superior */
+    cursor: pointer; /* Cursor tipo botón */
+}
+
+/* ================================ TOAST / SWEETALERT2 ================================ */
+
+/* Contenedor principal del mensaje tipo toast */
+.swal2-popup.swal2-toast {
+    background: var(--second-bg-color) !important; /* Fondo del toast */
+    color: var(--text-color) !important; /* Color del texto */
+    border: 1px solid var(--main-color); /* Borde con color principal */
+    border-radius: 0.75rem; /* Bordes redondeados */
+    box-shadow: 0 0 20px rgba(5, 185, 229, 0.3); /* Sombra luminosa */
+}
+
+/* TÍTULO DEL TOAST */
+.swal2-title {
+    color: var(--text-color) !important; /* Color del texto */
+    font-size: 0.95rem; /* Tamaño del texto */
+    font-weight: 500; /* Grosor del texto */
+}
+
+/* BARRA DE PROGRESO */
+.swal2-timer-progress-bar {
+    background: var(--main-color) !important; /* Color de la barra de tiempo */
+}
+
+/* ================================ PIE DE PÁGINA (FOOTER) ================================ */
+.footer {
+    display: flex; /* Usa Flexbox para organizar el contenido */
+    justify-content: space-between; /* Separa el texto y el ícono */
+    align-items: center; /* Centra verticalmente los elementos */
+    flex-wrap: wrap; /* Permite salto de línea en pantallas pequeñas */
+    padding: 2rem 9%; /* Espaciado interno */
+    background: var(--second-bg-color); /* Fondo secundario */
+}
+
+/* TEXTO DEL FOOTER */
+.footer-text p {
+    font-size: 1.6rem; /* Tamaño del texto */
+}
+
+/* ÍCONO "VOLVER ARRIBA" */
+.footer-iconTop a {
+    display: inline-flex; /* Permite centrar el ícono */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    padding: .8rem; /* Espaciado interno */
+    background: var(--main-color); /* Color de fondo */
+    border-radius: .8rem; /* Bordes redondeados */
+    transition: .5s ease; /* Transición suave */
+}
+
+/* Efecto hover del ícono */
+.footer-iconTop a:hover {
+    box-shadow: 0 0 1rem var(--main-color); /* Sombra luminosa */
+}
+
+/* Ícono dentro del botón */
+.footer-iconTop a i {
+    font-size: 2.4rem; /* Tamaño del ícono */
+    color: var(--second-bg-color); /* Color del ícono */
+}
+
+/* ================================ SISTEMA RESPONSIVE ================================ */
+/* Adaptación del diseño a múltiples tamaños de pantalla */
+
+/* ================================ PANTALLAS GRANDES ================================ */
+@media (max-width: 1200px) {
+    html {
+        font-size: 55%; /* Reduce el tamaño base del texto */
+    }
+}
+
+/* ================================ TABLETS GRANDES / LAPTOPS ================================ */
+@media (max-width: 991px) {
+    .header {
+        padding: 2rem 3%; /* Reduce el padding del navbar */
+    }
+
+    section {
+        padding: 10rem 3% 2rem; /* Ajusta el padding de las secciones */
+    }
+
+    .learning {
+        padding-bottom: 7rem; /* Espacio inferior adicional */
+    }
+
+    .project {
+        padding-bottom: 7rem; /* Espacio inferior adicional */
+    }
+
+    .contact {
+        min-height: auto; /* Permite altura automática */
+    }
+
+    .contact form {
+        padding: 2rem; /* Ajusta el padding del formulario */
+    }
+
+    .footer {
+        padding: 2rem 3%; /* Reduce el padding del footer */
+    }
+}
+
+/* ================================ TABLETS / MÓVILES GRANDES ================================ */
+@media (max-width: 768px) {
+
+    /* Ícono del menú hamburguesa */
+    #menu-icon {
+        display: block; /* Muestra el menú hamburguesa */
+    }
+
+    /* Menú desplegable */
+    .navbar {
+        position: absolute; /* Se posiciona debajo del header */
+        top: 100%;
+        left: 0;
+        width: 100%; /* Ocupa todo el ancho */
+        padding: 1rem 3%; /* Espaciado interno */
+        background: var(--bg-color); /* Fondo del menú */
+        border-top: .1rem solid rgba(0, 0, 0, .2); /* Borde superior */
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2); /* Sombra */
+        display: none; /* Oculto por defecto */
+    }
+
+    /* Menú activo */
+    .navbar.active {
+        display: block; /* Muestra el menú */
+    }
+
+    /* Enlaces del menú */
+    .navbar a {
+        display: block; /* Cada link en una línea */
+        font-size: 2rem; /* Tamaño del texto */
+        margin: 3rem 0; /* Separación vertical */
+    }
+
+    /* HOME */
+    .home {
+        flex-direction: column; /* Apila contenido verticalmente */
+    }
+
+    .home-content h3 {
+        font-size: 2.6rem; /* Reduce tamaño del subtítulo */
+    }
+
+    .home-content h1 {
+        font-size: 5rem; /* Reduce tamaño del título */
+    }
+
+    .home-img img {
+        width: 70vw; /* Imagen más grande en móviles */
+        margin-top: 4rem; /* Separación superior */
+    }
+
+    /* ABOUT */
+    .about {
+        flex-direction: column-reverse; /* Imagen debajo del texto */
+    }
+
+    .about img {
+        width: 70vw; /* Ajusta tamaño de la imagen */
+        margin-top: 4rem; /* Separación superior */
+    }
+
+    /* SECCIONES */
+    .learning h2,
+    .project h2 {
+        margin-bottom: 3rem; /* Reduce separación del título */
+    }
+
+    /* PROYECTOS */
+    .project-container {
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+    }
+
+    /* CONTACTO */
+    .contact form {
+        padding: 2rem 1.5rem; /* Ajusta padding del formulario */
+    }
+
+    .contact .input-box {
+        flex-direction: column; /* Inputs en columna */
+        gap: 1rem; /* Espacio entre inputs */
+    }
+
+    .contact textarea {
+        height: 140px; /* Altura fija del textarea */
+    }
+
+    /* SWEETALERT2 */
+    .swal2-popup.swal2-toast {
+        width: 90% !important; /* Ancho del toast */
+        margin: 0 auto !important; /* Centrado */
+        right: 5% !important;
+        left: auto !important;
+        font-size: 1.4rem; /* Tamaño del texto */
+    }
+
+    .swal2-container {
+        top: 1rem !important; /* Separación superior */
+    }
+}
+
+/* ================================ MÓVILES MEDIANOS ================================ */
+@media (max-width: 617px) {
+    .project-container {
+        grid-template-columns: 1fr; /* Una sola columna */
+    }
+}
+
+/* ================================ MÓVILES PEQUEÑOS ================================ */
+@media (max-width: 450px) {
+    html {
+        font-size: 50%; /* Reduce tamaño base */
+    }
+
+    .contact form {
+        padding: 1.5rem 1rem; /* Reduce padding */
+    }
+
+    .contact form .input-box input {
+        width: 100%; /* Inputs a una sola columna */
+    }
+
+    .contact .btn {
+        font-size: 1.4rem; /* Tamaño del botón */
+        padding: 1.2rem; /* Ajuste de padding */
+    }
+
+    .swal2-popup.swal2-toast {
+        width: 95% !important; /* Ancho máximo del toast */
+        font-size: 1.3rem; /* Texto más pequeño */
+    }
+
+    .swal2-title {
+        text-align: center; /* Centra el texto */
+    }
+}
+
+/* ================================ MÓVILES MUY PEQUEÑOS ================================ */
+@media (max-width: 365px) {
+
+    /* HOME */
+    .home-img img {
+        width: 90vw; /* Imagen casi completa */
+    }
+
+    /* ABOUT */
+    .about-img img {
+        width: 90vw; /* Imagen casi completa */
+    }
+
+    /* FOOTER */
+    .footer {
+        flex-direction: column-reverse; /* Ícono arriba, texto abajo */
+    }
+
+    .footer p {
+        text-align: center; /* Texto centrado */
+        margin-top: 2rem; /* Separación superior */
+    }
+}

@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% comment contenido %} Contenido de la sección {% endcomment %}
+{% block content %}
+
+    {% comment include/section %} Contenido de cada una de las secciones (con diseño incluido) {% endcomment %}
+    
+    {% include "include/home.html" %}
+
+    {% include "include/about.html" %}
+
+    {% include "include/learning.html" %}
+
+    {% include "include/projects.html" with projects=projects %}
+
+    {% include "include/contact.html" %}
+
+{% endblock %}
