@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-^^&yo61_7xck2#jg(9k8=)2x1u0eqz2v$(*zn=2ehpgkd5&si@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'portfolio-production-1789.up.railway.app']
+ALLOWED_HOSTS = ['localhost','web-production-17d9.up.railway.app']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
     # Aplicaciones
     'apps.pages',
     'apps.project',
@@ -121,9 +122,13 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STORAGES = {"staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",},}
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Archivos media (Media Files)
 MEDIA_URL = '/media/'
@@ -139,4 +144,4 @@ EMAIL_HOST_PASSWORD = 'uapvrjbqfgpjxbpa'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Configuracion tokens
-CSRF_TRUSTES_ORIGINS = ['http://*', "https://portfolio-production-1789.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ['http://*','https://web-production-17d9.up.railway.app']
