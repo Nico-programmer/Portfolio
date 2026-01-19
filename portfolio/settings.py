@@ -134,4 +134,4 @@ EMAIL_HOST_USER = 'nicolas.paulo.vega06@gmail.com'
 EMAIL_HOST_PASSWORD = 'uapvrjbqfgpjxbpa'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-ALLOWED_HOST = ['localhost', 'portfolio-production-1789.up.railway.app']
+ALLOWED_HOST = ['localhost', 'https://portfolio-production-1789.up.railway.app/']
