@@ -134,6 +134,12 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Archivos media (Media Files)
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+
+from django.conf import settings as django_settings
+django_settings.ENVIRONMENT = ENVIRONMENT
+
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+
 if ENVIRONMENT == "development":
     DEBUG = True
 
@@ -143,7 +149,6 @@ if ENVIRONMENT == "development":
 else:
     DEBUG = False
 
-    # Configuracion de cloudinary (Usar archivos media)
     CLOUDINARY_STORAGE = {
         'CLOUD_NAME': os.getenv("CLOUD_NAME"),
         'API_KEY': os.getenv("CLOUD_API_KEY"),

@@ -26,5 +26,5 @@ urlpatterns = [
     path('', include('apps.pages.urls')),
 ]
 
-if settings.ENVIRONMENT == "development":
+if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
