@@ -30,8 +30,7 @@ SECRET_KEY = 'django-insecure-^^&yo61_7xck2#jg(9k8=)2x1u0eqz2v$(*zn=2ehpgkd5&si@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','portfolio-production-1789.up.railway.app']
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1:8000', '127.0.0.1','portfolio-production-1789.up.railway.app']
 
 # Application definition
 
@@ -47,6 +46,9 @@ INSTALLED_APPS = [
     'apps.pages',
     'apps.project',
     'apps.contact',
+    # Cloudinary
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -131,8 +133,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Archivos media (Media Files)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
 
 # Configuracion de correo (Email config)
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -145,3 +147,12 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Configuracion tokens
 CSRF_TRUSTED_ORIGINS = ['http://*','https://portfolio-production-1789.up.railway.app']
+
+# Configuracion de cloudinary (Usar archivos media)
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv("CLOUD_NAME"),
+    'API_KEY': os.getenv("CLOUD_API_KEY"),
+    'API_SECRET': os.getenv("CLOUD_API_SECRET"),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
