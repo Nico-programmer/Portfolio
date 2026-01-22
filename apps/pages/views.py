@@ -1,10 +1,11 @@
-from django.core.mail import EmailMessage
-from django.conf import settings
-from django.http import JsonResponse
 from django.shortcuts import render
-
+from django.http import JsonResponse
 from apps.project.models import Project
 from apps.contact.models import Contact
+import os
+
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 
 def index(request):
@@ -26,33 +27,35 @@ def index(request):
                 messages=user_message,
             )
 
-            body = (
-                f"Nombre: {name}\n"
-                f"Correo: {email}\n"
-                f"Teléfono: {phone}\n\n"
-                f"Mensaje:\n{user_message}"
-            )
-
-            email_message = EmailMessage(
+            message = Mail(
+                from_email="nicolas.paulo.vega06@gmail.com",
+                to_emails="nicolas.paulo.vega06@gmail.com",
                 subject=subject,
-                body=body,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                to=["nicolas.paulo.vega06@gmail.com"],
-                reply_to=[email],
+                plain_text_content=f"""
+                    Nombre: {name}
+                    Correo: {email}
+                    Teléfono: {phone}
+
+                    Mensaje:
+                    {user_message}
+                """,
             )
 
-            email_message.send(fail_silently=False)
+            message.reply_to = email
+
+            sg = SendGridAPIClient(os.getenv("SENDGRID_API_KEY"))
+            sg.send(message)
 
             return JsonResponse({
                 "status": "success",
-                "message": "Tu mensaje fue enviado con éxito ✅"
+                "message": "Mensaje enviado correctamente ✅"
             })
 
         except Exception as e:
-            print("ERROR EMAIL:", e)
+            print("SENDGRID ERROR:", e)
             return JsonResponse({
                 "status": "error",
-                "message": "No se pudo enviar el mensaje ❌"
+                "message": "Error al enviar el mensaje ❌"
             }, status=500)
 
     return render(request, "index.html", {"projects": projects})

@@ -1,12 +1,12 @@
-/* ================================ MENÚ DESPLEGABLE (NAVBAR MOBILE) ================================ */
+// ! MENÚ DESPLEGABLE (NAVBAR MOBILE)
 
-// Selecciona el ícono del menú
+// ? Selecciona el ícono del menú
 let menuIcon = document.querySelector('#menu-icon');
 
-// Selecciona la barra de navegación
+// ? Selecciona la barra de navegación
 let navbar = document.querySelector('.navbar');
 
-// Evento click para abrir/cerrar el menú
+// ? Evento click para abrir/cerrar el menú
 menuIcon.onclick = () => {
     // Cambia el ícono de hamburguesa a cerrar
     menuIcon.classList.toggle('fa-bars');
@@ -16,7 +16,7 @@ menuIcon.onclick = () => {
     navbar.classList.toggle('active');
 };
 
-/* ================================ ENLACE ACTIVO SEGÚN SECCIÓN ================================ */
+// ! ENLACE ACTIVO SEGÚN SECCIÓN
 
 // Selecciona todas las secciones
 let sections = document.querySelectorAll('section');
