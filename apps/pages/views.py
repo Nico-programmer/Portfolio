@@ -28,7 +28,7 @@ def index(request):
             )
 
             message = Mail(
-                from_email="Contacto Web <no-reply@sendgrid.net>",
+                from_email="Contacto Web <nicolas.paulo.vega06@gmail.com>",
                 to_emails="nicolas.paulo.vega06@gmail.com",
                 subject=f"Nuevo mensaje desde tu portafolio: {subject}",
                 plain_text_content=f"""
