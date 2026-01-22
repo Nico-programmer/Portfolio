@@ -58,6 +58,8 @@ def index(request):
                     "status": "error",
                     "message": "Error al enviar el mensaje ❌"
                 }, status=400)
+            
+            print(e)
 
             messages.error(request, "Error al enviar el mensaje")
 
