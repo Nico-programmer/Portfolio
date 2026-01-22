@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from django.http import JsonResponse
+from django.core.mail import EmailMessage
 from django.conf import settings
-from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.shortcuts import render
 
 from apps.project.models import Project
 from apps.contact.models import Contact
@@ -10,7 +10,6 @@ from apps.contact.models import Contact
 def index(request):
     projects = Project.objects.all()
 
-    # Solo aceptamos POST por AJAX
     if request.method == "POST" and request.headers.get("x-requested-with") == "XMLHttpRequest":
         try:
             name = request.POST.get("name")
@@ -19,7 +18,6 @@ def index(request):
             subject = request.POST.get("subject")
             user_message = request.POST.get("message")
 
-            # Guardamos el contacto
             Contact.objects.create(
                 name=name,
                 email=email,
@@ -28,22 +26,22 @@ def index(request):
                 messages=user_message,
             )
 
-            message = (
+            body = (
                 f"Nombre: {name}\n"
                 f"Correo: {email}\n"
                 f"Teléfono: {phone}\n\n"
                 f"Mensaje:\n{user_message}"
             )
 
-            # Envío del correo (SIN threading)
-            send_mail(
+            email_message = EmailMessage(
                 subject=subject,
-                message=message,
+                body=body,
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=["nicolas.paulo.vega06@gmail.com"],
+                to=["nicolas.paulo.vega06@gmail.com"],
                 reply_to=[email],
-                fail_silently=False,
             )
+
+            email_message.send(fail_silently=False)
 
             return JsonResponse({
                 "status": "success",
@@ -51,9 +49,7 @@ def index(request):
             })
 
         except Exception as e:
-            # Log real (útil en Railway)
             print("ERROR EMAIL:", e)
-
             return JsonResponse({
                 "status": "error",
                 "message": "No se pudo enviar el mensaje ❌"
