@@ -52,7 +52,7 @@ def index(request):
                 })
 
             messages.success(request, "Tu mensaje fue enviado con éxito!")
-        except Exception:
+        except Exception as e:
             if request.headers.get("x-requested-with") == "XMLHttpRequest":
                 return JsonResponse({
                     "status": "error",
