@@ -165,7 +165,7 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = os.getenv("SENDGRIDNAME_API_KEY")
 EMAIL_HOST_PASSWORD = os.getenv("SENDGRID_API_KEY")
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = "nicolas.paulo.vega06@gmail.com"
 
 # Configuracion tokens
 CSRF_TRUSTED_ORIGINS = ['http://*','https://portfolio-production-1789.up.railway.app']
