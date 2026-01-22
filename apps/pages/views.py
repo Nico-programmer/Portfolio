@@ -1,58 +1,62 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from django.http import JsonResponse
+from django.conf import settings
+from django.core.mail import send_mail
 
-# Importamos el modelo
 from apps.project.models import Project
 from apps.contact.models import Contact
 
-# Cargar correo
-from django.contrib import messages
-from django.core.mail import send_mail
-from django.conf import settings
-from django.http import JsonResponse
-import threading
-
-def send_contact_email(subject, body):
-    send_mail(
-        subject,
-        body,
-        settings.DEFAULT_FROM_EMAIL,
-        ["nicolas.paulo.vega06@gmail.com"],
-        fail_silently=False,
-    )
 
 def index(request):
     projects = Project.objects.all()
 
+    # Solo aceptamos POST por AJAX
     if request.method == "POST" and request.headers.get("x-requested-with") == "XMLHttpRequest":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        phone = request.POST.get("phone")
-        subject = request.POST.get("subject")
-        user_message = request.POST.get("message")
+        try:
+            name = request.POST.get("name")
+            email = request.POST.get("email")
+            phone = request.POST.get("phone")
+            subject = request.POST.get("subject")
+            user_message = request.POST.get("message")
 
-        Contact.objects.create(
-            name=name,
-            email=email,
-            phone=phone,
-            subject=subject,
-            messages=user_message,
-        )
+            # Guardamos el contacto
+            Contact.objects.create(
+                name=name,
+                email=email,
+                phone=phone,
+                subject=subject,
+                messages=user_message,
+            )
 
-        message = f"""
-            Nombre: {name}
-            Correo electronico: {email}
-            Telefono: {phone}
+            message = (
+                f"Nombre: {name}\n"
+                f"Correo: {email}\n"
+                f"Teléfono: {phone}\n\n"
+                f"Mensaje:\n{user_message}"
+            )
 
-            {user_message}
-        """
+            # Envío del correo (SIN threading)
+            send_mail(
+                subject=subject,
+                message=message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=["nicolas.paulo.vega06@gmail.com"],
+                reply_to=[email],
+                fail_silently=False,
+            )
 
-        # Enviamos el correo en segundo plano
-        threading.Thread(
-            target=send_contact_email,
-            args=(subject, message),
-        ).start()
+            return JsonResponse({
+                "status": "success",
+                "message": "Tu mensaje fue enviado con éxito ✅"
+            })
 
-        # Enviamos respuesta Json:
-        return JsonResponse({ "status": "success", "message": "Tu mensaje fue enviado con exito!" })
+        except Exception as e:
+            # Log real (útil en Railway)
+            print("ERROR EMAIL:", e)
+
+            return JsonResponse({
+                "status": "error",
+                "message": "No se pudo enviar el mensaje ❌"
+            }, status=500)
 
     return render(request, "index.html", {"projects": projects})

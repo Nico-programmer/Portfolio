@@ -169,3 +169,5 @@ DEFAULT_FROM_EMAIL = "nicolas.paulo.vega06@gmail.com"
 
 # Configuracion tokens
 CSRF_TRUSTED_ORIGINS = ['http://*','https://portfolio-production-1789.up.railway.app']
+
+EMAIL_TIMEOUT = 10
