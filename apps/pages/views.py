@@ -9,11 +9,21 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import JsonResponse
+import threading
+
+def send_contact_email(subject, body):
+    send_mail(
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        ["nicolas.paulo.vega06@gmail.com"],
+        fail_silently=False,
+    )
 
 def index(request):
     projects = Project.objects.all()
 
-    if request.method == "POST":
+    if request.method == "POST" and request.headers.get("x-requested-with") == "XMLHttpRequest":
         name = request.POST.get("name")
         email = request.POST.get("email")
         phone = request.POST.get("phone")
@@ -25,42 +35,25 @@ def index(request):
             email=email,
             phone=phone,
             subject=subject,
-            messages=user_message
+            messages=user_message,
         )
 
-        try:
-            send_mail(
-                subject,
-                f"""
-                    Nombre: {name}
-                    Email: {email}
-                    Telefono: +57 {phone}
+        message = f"""
+            Nombre: {name}
+            Correo electronico: {email}
+            Telefono: {phone}
 
-                    Mensaje:
-                    {user_message}
-                """,
-                settings.DEFAULT_FROM_EMAIL,
-                ["nicolas.paulo.vega06@gmail.com"],
-                fail_silently=False,
-            )
+            {user_message}
+        """
 
-            # 👇 RESPUESTA AJAX
-            if request.headers.get("x-requested-with") == "XMLHttpRequest":
-                return JsonResponse({
-                    "status": "success",
-                    "message": "Tu mensaje fue enviado con éxito ✅"
-                })
+        # Enviamos el correo en segundo plano
+        threading.Thread(
+            target=send_contact_email,
+            args=(subject, message),
+            daemon=True,
+        ).start()
 
-            messages.success(request, "Tu mensaje fue enviado con éxito!")
-        except Exception as e:
-            if request.headers.get("x-requested-with") == "XMLHttpRequest":
-                return JsonResponse({
-                    "status": "error",
-                    "message": "Error al enviar el mensaje ❌"
-                }, status=400)
-            
-            print(e)
-
-            messages.error(request, "Error al enviar el mensaje")
+        # Enviamos respuesta Json:
+        return JsonResponse({ "status": "success", "message": "Tu mensaje fue enviado con exito!" })
 
     return render(request, "index.html", {"projects": projects})
