@@ -28,16 +28,33 @@ def index(request):
             )
 
             message = Mail(
-                from_email="nicolas.paulo.vega06@gmail.com",
+                from_email="Contacto Web <no-reply@sendgrid.net>",
                 to_emails="nicolas.paulo.vega06@gmail.com",
-                subject=subject,
+                subject=f"Nuevo mensaje desde tu portafolio: {subject}",
                 plain_text_content=f"""
-                    Nombre: {name}
-                    Correo: {email}
-                    Teléfono: {phone}
+                    Hola Nicolás,
 
-                    Mensaje:
+                    Has recibido un nuevo mensaje a través del formulario de contacto de tu portafolio web.
+
+                    A continuación encontrarás los datos proporcionados por la persona que se comunicó contigo:
+
+                    Nombre completo:
+                    {name}
+
+                    Correo electrónico de contacto:
+                    {email}
+
+                    Número de teléfono:
+                    {phone}
+
+                    Mensaje enviado:
                     {user_message}
+
+                    Este mensaje fue generado automáticamente desde tu sitio web.
+                    Puedes responder directamente a este correo para contactar a la persona interesada.
+
+                    Saludos,
+                    Sistema de contacto de tu portafolio
                 """,
             )
 
