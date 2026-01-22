@@ -50,7 +50,6 @@ def index(request):
         threading.Thread(
             target=send_contact_email,
             args=(subject, message),
-            daemon=True,
         ).start()
 
         # Enviamos respuesta Json:
